@@ -24,9 +24,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/css/core-style.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/plugins.js",
+              "src/assets/js/classy-nav.min.js",
+              "src/assets/js/active.js",
+              "node_modules/moment/moment.js",
+              "node_modules/jspdf/dist/jspdf.min.js",
+              "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js"
+            ]
           },
           "configurations": {
             "production": {
