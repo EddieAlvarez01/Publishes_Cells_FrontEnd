@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'PublishesCellsAngular';
+
+  	title = 'PublishesCells';
+  	public user: User;
+
+  	constructor(
+
+  	){
+  		this.user = new User(null, null, null, null, null, null, null, null, null, 0, null);
+  	}
+
+  	Logout(){
+  		
+  	}
+
 }
