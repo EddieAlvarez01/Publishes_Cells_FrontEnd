@@ -61,5 +61,10 @@ export class ApiService{
 			}
 		);
 	}
+
+	//consume el update del estado de un usuario
+	EmailConfirm(email: string): Observable<any>{
+		return this._http.put(this.url + '/emailConfirm/' + email, null);
+	}
 	
 }
