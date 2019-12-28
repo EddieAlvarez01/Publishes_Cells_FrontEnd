@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
 import { BulkLoadComponent } from './components/bulk-load/bulk-load.component';
+import { CatalogueComponent } from './components/catalogue/catalogue.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
 	{ path: 'register', component: RegisterComponent },
 	{ path: 'emailConfirmation/:email', component: EmailConfirmationComponent },
 	{ path: 'bulkLoad', component: BulkLoadComponent },
+	{ path: 'catalogue', component: CatalogueComponent },
 	{ path: '**', component: HomeComponent } //404
 ];
 

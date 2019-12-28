@@ -12,10 +12,10 @@
 @import url(../../../node_modules/jquery-ui/themes/base/theme.css);
 @import url(../css/nice-select.css);
 @import url(../../../node_modules/font-awesome/css/font-awesome.min.css);
-/*@import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../../../node_modules/@syncfusion/ej2-angular-navigations/styles/material.css";
 @import "../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-@import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";*/
+@import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
 /* :: 3.0 Common/Base CSS */
 * {
   margin: 0;

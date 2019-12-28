@@ -85,5 +85,10 @@ export class ApiService{
 			}
 		);
 	}
+
+	//Devuelve todas las categorias
+	GetAllCategories(): Observable<any>{
+		return this._http.get(this.url + '/getAllCategories');
+	}
 	
 }

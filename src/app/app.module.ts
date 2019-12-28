@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
 import { BulkLoadComponent } from './components/bulk-load/bulk-load.component';
+import { CatalogueComponent } from './components/catalogue/catalogue.component';
+import { TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { BulkLoadComponent } from './components/bulk-load/bulk-load.component';
     LoginComponent,
     RegisterComponent,
     EmailConfirmationComponent,
-    BulkLoadComponent
+    BulkLoadComponent,
+    CatalogueComponent,
+    TreeViewComponent
   ],
   imports: [
     BrowserModule,
