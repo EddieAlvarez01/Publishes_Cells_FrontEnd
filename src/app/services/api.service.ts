@@ -66,5 +66,24 @@ export class ApiService{
 	EmailConfirm(email: string): Observable<any>{
 		return this._http.put(this.url + '/emailConfirm/' + email, null);
 	}
+
+	//llama al procedimineto que inserta productos
+	RegisterNewProduct(code: string, img: string, description: string, fatherCategory: string, daughterCategory: string, price: number, color: string, publicationDate: string,
+						idUser: number, stock: number): Observable<any>{
+		return this._http.post(this.url + '/registerProduct', 
+			{
+				code: code,
+				img: img,
+				description: description,
+				fatherCategory: fatherCategory,
+				daughterCategory: daughterCategory,
+				price: price,
+				color: color,
+				publicationDate: publicationDate,
+				idUser: idUser,
+				stock: stock
+			}
+		);
+	}
 	
 }

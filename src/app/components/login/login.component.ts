@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ApiService } from '../../services/api.service';
+import { TransferService } from '../../services/transfer.service';
 
 import { User } from '../../../models/user';
 
@@ -17,7 +19,9 @@ export class LoginComponent implements OnInit {
 	public user: User;
   	
   	constructor(
-  		private _apiService: ApiService
+  		private _apiService: ApiService,
+  		private _transferService: TransferService,
+  		private _router: Router
   	) { }
 
   	ngOnInit() {
@@ -47,12 +51,14 @@ export class LoginComponent implements OnInit {
   							this.user.shoppingCart = user[0].IDSHOPPINGCART;
   							switch(this.user.role){
   								case 1:
-  									alert("Usuario logeado como admin");
+  									
   								break;
   								case 2:
   								break;
   								case 3:
-  									alert("Usuario logeado como cliente");
+  									localStorage.setItem("user", JSON.stringify(this.user));
+  									this.SetUserNav();
+  									this.RedirectBulkLoad();
   								break;
   								default:
   									alert("Error no existe el rol");
@@ -72,6 +78,14 @@ export class LoginComponent implements OnInit {
   				alert("Error en el servidor");
   			}
   		);
+  	}
+
+  	SetUserNav(){
+  		this._transferService.CreateUserLogin(this.user);
+  	}
+
+  	RedirectBulkLoad(){
+  		this._router.navigate(['/bulkLoad']);
   	}
 
 }
