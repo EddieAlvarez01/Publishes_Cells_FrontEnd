@@ -90,5 +90,9 @@ export class ApiService{
 	GetAllCategories(): Observable<any>{
 		return this._http.get(this.url + '/getAllCategories');
 	}
-	
+
+	//Devuelve todos los productos a un cliente no logeado
+	GetAllProductsNoLoggedCustomer(): Observable<any>{
+		return this._http.get(this.url + '/getAllProduct_AllCategories');
+	}
 }

@@ -1828,6 +1828,17 @@ img {
   cursor: pointer;
 }
 
+.imgForparejo{
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.imgForparejo img{
+  max-width: 100%;
+  height: 100%;
+}
+
 
 /******************************************RESPONSIVE IMAGES AND VIDEOS **************************/
 

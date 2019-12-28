@@ -21,7 +21,12 @@ export class AppComponent {
       private _transferService: TransferService,
       private _router: Router
   	){
-  		this.user = new User(null, null, null, null, null, null, null, null, null, 0, null);
+      let user: User = JSON.parse(localStorage.getItem("user"));
+      if(user != null || user != undefined){
+        this.user = user;
+      }else{
+        this.user = new User(null, null, null, null, null, null, null, null, null, 0, null); 
+      }
       this._transferService.createSource$.subscribe(
         result => {
           this.user = result; 
