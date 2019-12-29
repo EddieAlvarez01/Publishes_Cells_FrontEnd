@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
+import { TreeViewComponent, NodeSelectEventArgs } from '@syncfusion/ej2-angular-navigations';
 
 import { ApiService } from '../../services/api.service';
 
@@ -19,12 +19,14 @@ export class CatalogueComponent implements OnInit {
 	public dataTree: Array<Object>;
 	public field: Object;
 	public productCatalog: Array<Product>;
+	public idCategorySelected: number;
 
   	constructor(
   		private _apiService: ApiService
   	) { 
   		this.dataTree = new Array();
   		this.productCatalog = new Array();
+  		this.idCategorySelected = 0;
   	}
 
   	ngOnInit() {
@@ -82,5 +84,46 @@ export class CatalogueComponent implements OnInit {
   			}
   		);
   	}
+
+  	nodeSelected(e: NodeSelectEventArgs) {
+  		this.idCategorySelected = <number>e.nodeData.id;
+  		let user: User = JSON.parse(localStorage.getItem("user"));
+  		if(user != null && user != undefined){
+  			if(user.name == null){
+  				this.ReloadCatalogNoLogged();
+  			}
+  		}else{
+  			this.ReloadCatalogNoLogged();
+  		}
+       /* if(text.includes(".")){
+        	this.idArchivo = <number>e.nodeData.id;
+          this.nameFile = text;
+        	this.idCarpeta = null;
+          this.parentFile = <number>e.nodeData.parentID;
+          this.LoadContent();
+        }else{	
+       		this.idCarpeta = <number>e.nodeData.id;
+       		this.idArchivo = null;
+       		//this.tree.addNodes([item]);
+        }*/
+    }
+
+    ReloadCatalogNoLogged(){
+    	this.productCatalog = [];
+    	this._apiService.GetAllProductsNoLoggedByCategory(this.idCategorySelected).subscribe(
+    		result => {
+    			let listProducts: any[] = result.rows;
+			  	if(listProducts.length > 0){
+			  		listProducts.forEach((item) => {
+			  			let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE);
+			  			this.productCatalog.push(product);
+			  		});
+			  	}
+    		},
+    		err => {
+
+    		}
+    	);
+    }
 
 }
