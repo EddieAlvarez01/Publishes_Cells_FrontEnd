@@ -41,7 +41,6 @@ export class RegisterComponent implements OnInit {
 
   	onSubmitForm(){
   		this.registrationDate = moment().format('DD-MM-YYYY HH:mm:ss');
-      console.log(this.birhtday);
       this.birhtday = moment(this.birhtday, 'YYYY-MM-DD').format('DD-MM-YYYY');
       this.state = 1;
       this.role = 3;

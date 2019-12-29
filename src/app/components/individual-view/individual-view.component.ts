@@ -39,4 +39,8 @@ export class IndividualViewComponent implements OnInit {
   		});
   	}
 
+  	ReditectShop(){
+  		this._router.navigate(['/catalogue']);
+  	}
+
 }

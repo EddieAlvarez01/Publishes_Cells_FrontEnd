@@ -25,7 +25,7 @@
                 </div>
                 <!-- Cart & Favourite Box -->
                 <div class="cart-fav-box d-flex align-items-center">
-                    <button name="ReturnHome"  class="btn essence-btn">Regresar a la tienda</button>
+                    <button name="ReturnHome"  (click)="ReditectShop()" class="btn essence-btn">Regresar a la tienda</button>
                     <!-- Cart -->
                     <button type="submit" *ngIf="user" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
                 </div>

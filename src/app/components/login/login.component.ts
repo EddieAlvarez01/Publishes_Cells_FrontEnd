@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
   								case 3:
   									localStorage.setItem("user", JSON.stringify(this.user));
   									this.SetUserNav();
-  									this.RedirectBulkLoad();
+  									this.RedirectShop();
   								break;
   								default:
   									alert("Error no existe el rol");
@@ -87,5 +87,9 @@ export class LoginComponent implements OnInit {
   	RedirectBulkLoad(){
   		this._router.navigate(['/bulkLoad']);
   	}
+
+    RedirectShop(){
+      this._router.navigate(['/catalogue']);
+    }
 
 }

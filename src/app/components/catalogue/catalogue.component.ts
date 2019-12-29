@@ -53,6 +53,20 @@ export class CatalogueComponent implements OnInit {
   				}
   				this.field = { dataSource: this.dataTree, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
 			  	if(this.user != null && this.user != undefined){
+			  		this._apiService.GetProductsByUser(this.user.id).subscribe(
+			  			result => {
+			  				let listProducts: any[] = result.rows;
+			  				if(listProducts.length > 0){
+			  					listProducts.forEach((item) => {
+			  						let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  						this.productCatalog.push(product);
+			  					});	
+			  				}
+			  			},
+			  			err => {
+			  				alert("Error al cargar los productos");
+			  			}
+			  		);
 			  	}else{
 			  		this._apiService.GetAllProductsNoLoggedCustomer().subscribe(
 			  			result => {
@@ -79,6 +93,7 @@ export class CatalogueComponent implements OnInit {
   	nodeSelected(e: NodeSelectEventArgs) {
   		this.idCategorySelected = <number>e.nodeData.id;
   		if(this.user != null && this.user != undefined){
+  			this.ReloadCatalogLogged();
   		}else{
   			this.ReloadCatalogNoLogged();
   		}
@@ -113,12 +128,44 @@ export class CatalogueComponent implements OnInit {
     	);
     }
 
+    ReloadCatalogLogged(){
+    	this.productCatalog = [];
+    	this._apiService.GetProductsUserByCategory(this.idCategorySelected, this.user.id).subscribe(
+    		result => {
+    			let listProducts: any[] = result.rows;
+			  	if(listProducts.length > 0){
+			  		listProducts.forEach((item) => {
+			  			let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  			this.productCatalog.push(product);
+			  		});
+			  	}
+    		},
+    		err => {
+    			alert("Error al cargar los productos");
+    		}
+    	);
+    }
+
     onSubmitSearch(){
     	this.productCatalog = [];
     	this.idCategorySelected = parseInt($('#slCategory').val());
     	console.log(this.idCategorySelected);
     	if(this.idCategorySelected == 0){
     		if(this.user != null && this.user != undefined){
+    			this._apiService.GetProductsUserMatch(this.user.id, this.matchText).subscribe(
+    				result => {
+    					let listProducts: any[] = result.rows;
+			  			if(listProducts.length > 0){
+			  				listProducts.forEach((item) => {
+			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  					this.productCatalog.push(product);
+			  				});
+			  			}
+    				},
+    				err => {
+    					alert("Error al cargar productos");
+    				}
+    			);
     		}else{
     			this._apiService.GetAllProductsNoLoggedMatch(this.matchText).subscribe(
     				result => {
@@ -137,7 +184,20 @@ export class CatalogueComponent implements OnInit {
     		}
     	}else{
     		if(this.user != null && this.user != undefined){
-
+    			this._apiService.GetProductsUserMatchByCategory(this.user.id, this.matchText, this.idCategorySelected).subscribe(
+    				result => {
+    					let listProducts: any[] = result.rows;
+			  			if(listProducts.length > 0){
+			  				listProducts.forEach((item) => {
+			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  					this.productCatalog.push(product);
+			  				});
+			  			}
+    				},
+    				err => {
+    					alert("Error al cargar productos");
+    				}
+    			);
     		}else{
     			this._apiService.GetAllProductsNoLoggedMatchByCategory(this.idCategorySelected, this.matchText).subscribe(
     				result => {

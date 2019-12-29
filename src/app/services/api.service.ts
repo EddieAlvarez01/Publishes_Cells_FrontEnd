@@ -115,4 +115,24 @@ export class ApiService{
 	GetProductId(idProduct: number): Observable<any>{
 		return this._http.get(this.url + '/getProductId/' + idProduct);
 	}
+
+	//Devuelve para un usuario logeado los productos publicados que no son suyos
+	GetProductsByUser(idUser: number): Observable<any>{
+		return this._http.get(this.url + '/getProductsUser/' + idUser);
+	}
+
+	//Devuele para un usuario logeado los productos publicados que no son suyos por categoria seleccionada
+	GetProductsUserByCategory(idCategory: number, idUser: number): Observable<any>{
+		return this._http.get(this.url + '/getProductsUserByCategory/' + idUser + '/' + idCategory);
+	}
+
+	//DDevuele para un usuario logeado los productos publicados que no son suyos por filtrado de busqueda
+	GetProductsUserMatch(idUser: number, matchTxt: string): Observable<any>{
+		return this._http.get(this.url + '/getProductsUserMatch/' + idUser + '/' + matchTxt.toLowerCase());
+	} 
+
+	//Devuele para un usuario logeado los productos publicados que no son suyos por filtrado de busqueda y categoria
+	GetProductsUserMatchByCategory(idUser: number, matchTxt: string, idCategory: number): Observable<any>{
+		return this._http.get(this.url + '/getProductsUserMatchByCategory/' + idUser + '/' + idCategory + '/' + matchTxt.toLowerCase());
+	}
 }
