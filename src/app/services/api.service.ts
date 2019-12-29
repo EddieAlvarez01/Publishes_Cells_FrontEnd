@@ -96,7 +96,18 @@ export class ApiService{
 		return this._http.get(this.url + '/getAllProduct_AllCategories');
 	}
 
+	//Devuelve todos los productos filtrado por categoria a un cliente no logeado
 	GetAllProductsNoLoggedByCategory(idCategory: number): Observable<any>{
 		return this._http.get(this.url + '/getAllProductNoLogedByCategory/' + idCategory);
+	}
+
+	//Devuelve todos los productos por una coincidencia de texto
+	GetAllProductsNoLoggedMatch(matchTxt: string): Observable<any>{
+		return this._http.get(this.url + '/getAllProductsNoLoggedMatch/' + matchTxt.toLowerCase());
+	}
+
+	//Devuelve todos los productos por una coincidencia de texto y por categoria
+	GetAllProductsNoLoggedMatchByCategory(idCategory: number, matchTxt: string): Observable<any>{
+		return this._http.get(this.url + '/getAllProductsNoLoggedMatchByCategory/' + idCategory + "/" + matchTxt.toLowerCase());
 	}
 }

@@ -7,6 +7,8 @@ import { Category } from '../../../models/category';
 import { User } from '../../../models/user';
 import { Product } from '../../../models/product';
 
+declare var $:any;
+
 @Component({
   selector: 'app-catalogue',
   templateUrl: './catalogue.component.html',
@@ -18,15 +20,20 @@ export class CatalogueComponent implements OnInit {
 	public tree: TreeViewComponent;
 	public dataTree: Array<Object>;
 	public field: Object;
+	public itemsCategory: Array<Category>;
 	public productCatalog: Array<Product>;
 	public idCategorySelected: number;
+	public user: User;
+	public matchText: string;
 
   	constructor(
   		private _apiService: ApiService
   	) { 
   		this.dataTree = new Array();
+  		this.itemsCategory = new Array();
   		this.productCatalog = new Array();
   		this.idCategorySelected = 0;
+  		this.user = JSON.parse(localStorage.getItem("user"));
   	}
 
   	ngOnInit() {
@@ -36,6 +43,7 @@ export class CatalogueComponent implements OnInit {
   				if(arrayCategories.length > 0){
   					arrayCategories.forEach((item) => {
   						let newCategoy: Category = new Category(item.ID, item.NAME, item.FATHERCATEGORY);
+  						this.itemsCategory.push(newCategoy);
   						if(newCategoy.idFather != null){
   							this.dataTree.push({id: newCategoy.id, pid: newCategoy.idFather, name: newCategoy.name, hasChild: true});
   						}else{
@@ -44,31 +52,14 @@ export class CatalogueComponent implements OnInit {
   					});
   				}
   				this.field = { dataSource: this.dataTree, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
-  				let user: User = JSON.parse(localStorage.getItem("user"));
-			  	if(user != null && user != undefined){
-			  		if(user.name == null){
-			  			this._apiService.GetAllProductsNoLoggedCustomer().subscribe(
-			  			result => {
-			  				let listProducts: any[] = result.rows;
-			  				if(listProducts.length > 0){
-			  					listProducts.forEach((item) => {
-			  						let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE);
-			  						this.productCatalog.push(product);
-			  					});
-			  				}
-			  			},
-			  			err => {
-			  				alert("Error al cargar productos");
-			  			}
-			  			);
-			  		}
+			  	if(this.user != null && this.user != undefined){
 			  	}else{
 			  		this._apiService.GetAllProductsNoLoggedCustomer().subscribe(
 			  			result => {
 			  				let listProducts: any[] = result.rows;
 			  				if(listProducts.length > 0){
 			  					listProducts.forEach((item) => {
-			  						let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE);
+			  						let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
 			  						this.productCatalog.push(product);
 			  					});
 			  				}
@@ -87,11 +78,7 @@ export class CatalogueComponent implements OnInit {
 
   	nodeSelected(e: NodeSelectEventArgs) {
   		this.idCategorySelected = <number>e.nodeData.id;
-  		let user: User = JSON.parse(localStorage.getItem("user"));
-  		if(user != null && user != undefined){
-  			if(user.name == null){
-  				this.ReloadCatalogNoLogged();
-  			}
+  		if(this.user != null && this.user != undefined){
   		}else{
   			this.ReloadCatalogNoLogged();
   		}
@@ -115,15 +102,59 @@ export class CatalogueComponent implements OnInit {
     			let listProducts: any[] = result.rows;
 			  	if(listProducts.length > 0){
 			  		listProducts.forEach((item) => {
-			  			let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE);
+			  			let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
 			  			this.productCatalog.push(product);
 			  		});
 			  	}
     		},
     		err => {
-
-    		}
+    			alert("Error al cargar los productos");
+    		}	
     	);
+    }
+
+    onSubmitSearch(){
+    	this.productCatalog = [];
+    	this.idCategorySelected = parseInt($('#slCategory').val());
+    	console.log(this.idCategorySelected);
+    	if(this.idCategorySelected == 0){
+    		if(this.user != null && this.user != undefined){
+    		}else{
+    			this._apiService.GetAllProductsNoLoggedMatch(this.matchText).subscribe(
+    				result => {
+    					let listProducts: any[] = result.rows;
+			  			if(listProducts.length > 0){
+			  				listProducts.forEach((item) => {
+			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  					this.productCatalog.push(product);
+			  				});
+			  			}
+    				},
+    				err => {
+    					alert("Error al cargar productos");
+    				}
+    			);
+    		}
+    	}else{
+    		if(this.user != null && this.user != undefined){
+
+    		}else{
+    			this._apiService.GetAllProductsNoLoggedMatchByCategory(this.idCategorySelected, this.matchText).subscribe(
+    				result => {
+    					let listProducts: any[] = result.rows;
+			  			if(listProducts.length > 0){
+			  				listProducts.forEach((item) => {
+			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  					this.productCatalog.push(product);
+			  				});
+			  			}
+    				},
+    				err => {
+    					alert("Error al cargar productos");
+    				}
+    			);
+    		}
+    	}
     }
 
 }

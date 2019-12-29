@@ -37,7 +37,7 @@ export class AppComponent {
   	Logout(){
   		let logUser = new User(null, null, null, null, null, null, null, null, null, 0, null);
       this.user = logUser;
-      localStorage.setItem("user", JSON.stringify(logUser));
+      localStorage.removeItem("user");
       this.RedirectToHome();
   	}
 
