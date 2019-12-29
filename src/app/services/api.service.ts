@@ -110,4 +110,9 @@ export class ApiService{
 	GetAllProductsNoLoggedMatchByCategory(idCategory: number, matchTxt: string): Observable<any>{
 		return this._http.get(this.url + '/getAllProductsNoLoggedMatchByCategory/' + idCategory + "/" + matchTxt.toLowerCase());
 	}
+
+	//Devuelve un producto para la pantalla individual
+	GetProductId(idProduct: number): Observable<any>{
+		return this._http.get(this.url + '/getProductId/' + idProduct);
+	}
 }

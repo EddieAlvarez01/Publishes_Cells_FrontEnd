@@ -61,7 +61,7 @@
 
                                     <!-- Product Description -->
                                     <div class="product-description">
-                                        <a href="#">
+                                        <a [routerLink]="['/individualView/' + product.id]">
                                             <h6>{{product.description}}</h6>
                                         </a>
                                         <label>Color: {{product.color}}</label>

@@ -1,0 +1,34 @@
+<section class="single_product_details_area d-flex align-items-center">
+
+        <!-- Single Product Thumb -->
+        <div class="single_product_thumb clearfix">
+            <div class="product_thumbnail_slides">
+                <img src="{{'http://localhost:3700/api/get-image/' + product.IMAGE}}" alt="image not found">
+            </div>
+        </div>
+
+        <!-- Single Product Description -->
+        <div class="single_product_desc clearfix">
+            <span>Publicado por: {{ product.NAME + ' ' + product.LASTNAME }}</span>
+            <h2>{{product.DESCRIPTION}}</h2>
+            <p class="product-price">Q{{product.PRICE}}</p>
+            <p class="product-desc">Fecha de publicación: {{product.PUBLICATIONDATE}}<br>
+                Color: {{product.NOMBRE}}<br>
+                Disponibles: {{product.STOCK}}
+            </p>
+
+            <!-- Form -->
+            <form class="cart-form clearfix">
+                <!-- Select Box -->
+                <div class="select-box d-flex mt-50 mb-30">
+                    
+                </div>
+                <!-- Cart & Favourite Box -->
+                <div class="cart-fav-box d-flex align-items-center">
+                    <button name="ReturnHome"  class="btn essence-btn">Regresar a la tienda</button>
+                    <!-- Cart -->
+                    <button type="submit" *ngIf="user" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
+                </div>
+            </form>
+        </div>
+    </section>
