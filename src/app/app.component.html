@@ -3,7 +3,9 @@
     <!-- Classy Menu -->
     <nav class="classy-navbar navbar navbar-expand-lg" id="essenceNav">
       <!-- Logo -->
-      <a class="nav-brand" href="index.html"><img class="img-fluid" src="" alt=""></a>
+      <div class="imgForparejo2">
+        <a class="nav-brand" href="index.html"><img class="img-fluid" src="{{'http://localhost:3700/api/get-image/' + logo}}" alt="Image not found"></a>
+      </div>
         <!-- Navbar Toggler -->
         <div class="classy-navbar-toggler">
           <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -64,9 +66,14 @@
       </div>
     </ng-template>
     <ng-template #sinLogin>
+      <div class="header-meta d-flex clearfix justify-content-end">
+        <div class="cart-area">
+        <a [routerLink]="['/shoppingCart']" id="essenceCartBtn"><img src="../assets/img/core-img/Fevicon.png" alt=""> Carrito de Compras</a>
+      </div>
         <div class="user-login-info">
           <a class="manito" (click)="Logout()"><img src="../assets/img/core-img/user.svg" alt="">Cerrar Sesión</a>
         </div>
+      </div>
     </ng-template>
     </div>
 </header>

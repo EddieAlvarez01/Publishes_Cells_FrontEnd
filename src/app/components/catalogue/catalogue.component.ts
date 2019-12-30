@@ -7,6 +7,8 @@ import { Category } from '../../../models/category';
 import { User } from '../../../models/user';
 import { Product } from '../../../models/product';
 
+//Libreria JS
+import * as toastr from 'toastr';
 declare var $:any;
 
 @Component({
@@ -25,6 +27,10 @@ export class CatalogueComponent implements OnInit {
 	public idCategorySelected: number;
 	public user: User;
 	public matchText: string;
+  public nameModal: string;
+  public idPModal: number;
+  public indexCartArray: number;
+  public listStock: Array<number>;
 
   	constructor(
   		private _apiService: ApiService
@@ -33,6 +39,7 @@ export class CatalogueComponent implements OnInit {
   		this.itemsCategory = new Array();
   		this.productCatalog = new Array();
   		this.idCategorySelected = 0;
+      this.listStock = new Array();
   		this.user = JSON.parse(localStorage.getItem("user"));
   	}
 
@@ -58,9 +65,10 @@ export class CatalogueComponent implements OnInit {
 			  				let listProducts: any[] = result.rows;
 			  				if(listProducts.length > 0){
 			  					listProducts.forEach((item) => {
-			  						let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  						let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME, item.STOCK, null);
 			  						this.productCatalog.push(product);
-			  					});	
+			  					});
+                  this.VerifyCart();	
 			  				}
 			  			},
 			  			err => {
@@ -73,7 +81,7 @@ export class CatalogueComponent implements OnInit {
 			  				let listProducts: any[] = result.rows;
 			  				if(listProducts.length > 0){
 			  					listProducts.forEach((item) => {
-			  						let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  						let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME, item.STOCK, null);
 			  						this.productCatalog.push(product);
 			  					});
 			  				}
@@ -117,7 +125,7 @@ export class CatalogueComponent implements OnInit {
     			let listProducts: any[] = result.rows;
 			  	if(listProducts.length > 0){
 			  		listProducts.forEach((item) => {
-			  			let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  			let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME, item.STOCK, null);
 			  			this.productCatalog.push(product);
 			  		});
 			  	}
@@ -135,8 +143,9 @@ export class CatalogueComponent implements OnInit {
     			let listProducts: any[] = result.rows;
 			  	if(listProducts.length > 0){
 			  		listProducts.forEach((item) => {
-			  			let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  			let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME, item.STOCK, null);
 			  			this.productCatalog.push(product);
+              this.VerifyCart();
 			  		});
 			  	}
     		},
@@ -157,8 +166,9 @@ export class CatalogueComponent implements OnInit {
     					let listProducts: any[] = result.rows;
 			  			if(listProducts.length > 0){
 			  				listProducts.forEach((item) => {
-			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME, item.STOCK, null);
 			  					this.productCatalog.push(product);
+                  this.VerifyCart();
 			  				});
 			  			}
     				},
@@ -172,7 +182,7 @@ export class CatalogueComponent implements OnInit {
     					let listProducts: any[] = result.rows;
 			  			if(listProducts.length > 0){
 			  				listProducts.forEach((item) => {
-			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME, item.STOCK, null);
 			  					this.productCatalog.push(product);
 			  				});
 			  			}
@@ -189,8 +199,9 @@ export class CatalogueComponent implements OnInit {
     					let listProducts: any[] = result.rows;
 			  			if(listProducts.length > 0){
 			  				listProducts.forEach((item) => {
-			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME, item.STOCK, null);
 			  					this.productCatalog.push(product);
+                  this.VerifyCart();
 			  				});
 			  			}
     				},
@@ -204,7 +215,7 @@ export class CatalogueComponent implements OnInit {
     					let listProducts: any[] = result.rows;
 			  			if(listProducts.length > 0){
 			  				listProducts.forEach((item) => {
-			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME);
+			  					let product: Product = new Product(item.ID, item.IMAGE, item.DESCRIPTION, item.PRICE, item.NOMBRE, item.NAME + " " + item.LASTNAME, item.STOCK, null);
 			  					this.productCatalog.push(product);
 			  				});
 			  			}
@@ -215,6 +226,62 @@ export class CatalogueComponent implements OnInit {
     			);
     		}
     	}
+    }
+
+    VerifyCart(){
+      this.productCatalog.forEach((element, index) => {
+        this._apiService.VerifyProductCart(this.user.shoppingCart, element.id).subscribe(
+          result => {
+            let verify = result.rows;
+            if(verify.length > 0){
+              this.productCatalog[index].inCart = 1;
+            }
+          },
+          err => {
+            console.log("Error al verificar " + element.description);
+          }
+        );
+      });
+    }
+
+    AddCart(idProduct: number){
+      this.listStock = [];
+      this.productCatalog.forEach((item, index) => {
+        if(item.id == idProduct){
+          this.nameModal = item.description;
+          this.idPModal = idProduct;
+          this.indexCartArray = index;
+          for(let x=0; x<item.stock; x++){
+            this.listStock.push(x+1);
+          }
+          return;
+        }
+      });
+      /*for(let item of this.productCatalog){
+        if(item.id == idProduct){
+          this.nameModal = item.description;
+          this.idPModal = idProduct;
+          for(let x=0; x<item.stock; x++){
+            this.listStock.push(x+1);
+          }
+          break;
+        }
+      }*/
+      $('#modalAddCart').modal();
+    }
+
+    ConfirmAddToCart(){
+      let quantity: number = parseInt($('#slModalStock').val());
+      this._apiService.AddProductToCart(this.user.shoppingCart, this.idPModal, quantity).subscribe(
+        result => {
+          this.productCatalog[this.indexCartArray].inCart = 1;
+          $('#modalAddCart').modal("hide");
+          toastr.success("Añadido al carrito de compras correctamente");
+        },
+        err => {
+          alert("Error al agregar al carro");
+        }
+      );
     }
 
 }

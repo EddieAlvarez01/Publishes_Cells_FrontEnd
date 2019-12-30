@@ -71,9 +71,14 @@
                                         <!-- Hover Content -->
                                         <div class="hover-content" *ngIf="user">
                                             <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
+                                            <div class="add-to-cart-btn" *ngIf="product.stock > 0; then btnCart else btnExhausted"></div>
+                                            <ng-template #btnCart>
+                                                <button *ngIf="!product.inCart" value="{{product.id}}" #btnAddCart (click)="AddCart(btnAddCart.value)" class="btn essence-btn">Add to Cart</button>
+                                                <button *ngIf="product.inCart" class="btn essence-btn" disabled>Añadido al carro</button>
+                                            </ng-template>
+                                            <ng-template #btnExhausted>
+                                                <button class="btn essence-btn" disabled>Agotado</button>
+                                            </ng-template>
                                         </div>
                                     </div>
                                 </div>
@@ -81,6 +86,31 @@
 
                         </div>
                     </div>
+
+                    <div class="modal fade" id="modalAddCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Añadir al carrito</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <h6>{{nameModal}}</h6>
+                            <label for="slcMS">Cantidad: </label>
+                            <select name="slcMS" class="form-control" id="slModalStock">
+                                <option *ngFor="let item of listStock" value="{{item}}">{{item}}</option>
+                            </select>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" (click)="ConfirmAddToCart()" class="btn btn-primary">Añadir al carrito</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <!-- Pagination -->
                     <nav aria-label="navigation">
                         <ul class="pagination mt-50 mb-70">

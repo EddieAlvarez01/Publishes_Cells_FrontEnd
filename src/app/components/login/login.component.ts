@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   			result => {
   				let user: any[] = result.rows;
   				if(user.length > 0){
+            console.log(user[0]);
   					switch(user[0].STATE){
   						case 1:
   							alert("Error: Verifique su correo electronico");

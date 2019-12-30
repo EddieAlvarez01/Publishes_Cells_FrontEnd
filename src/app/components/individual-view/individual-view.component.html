@@ -24,11 +24,40 @@
                     
                 </div>
                 <!-- Cart & Favourite Box -->
-                <div class="cart-fav-box d-flex align-items-center">
+                <div class="cart-fav-box d-flex align-items-center" *ngIf="product.STOCK > 0; then btnCart else btnExhausted"></div>
+                <ng-template #btnCart>
                     <button name="ReturnHome"  (click)="ReditectShop()" class="btn essence-btn">Regresar a la tienda</button>
                     <!-- Cart -->
-                    <button type="submit" *ngIf="user" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
-                </div>
+                    <button style="margin-left: 10px" *ngIf="user && !isCart" name="addtocart" (click)="AddCart()" class="btn essence-btn">Add to cart</button>
+                    <button style="margin-left: 10px" class="btn essence-btn" *ngIf="user && isCart" disabled>Ya ha sido añadido al carrito</button>
+                </ng-template>
+                <ng-template #btnExhausted>
+                    <button name="ReturnHome"  (click)="ReditectShop()" class="btn essence-btn">Regresar a la tienda</button>
+                    <button style="margin-left: 10px" class="btn essence-btn" disabled>Agotado</button>
+                </ng-template>
             </form>
         </div>
     </section>
+    <div class="modal fade" id="modalAddCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Añadir al carrito</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <h6>{{product.DESCRIPTION}}</h6>
+                            <label for="slcMS">Cantidad: </label>
+                            <select name="slcMS" class="form-control" id="slModalStock">
+                                <option *ngFor="let item of listStock" value="{{item}}">{{item}}</option>
+                            </select>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" (click)="ConfirmAddToCart()" class="btn btn-primary">Añadir al carrito</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>

@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@icon/themify-icons": "^1.0.1",
     "@syncfusion/ej2-angular-navigations": "^17.4.39",
     "@syncfusion/ej2-ng-navigations": "^16.2.50",
     "bootstrap": "^4.4.1",
@@ -30,6 +31,7 @@
     "moment": "^2.24.0",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.3",
+    "toastr": "^2.1.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

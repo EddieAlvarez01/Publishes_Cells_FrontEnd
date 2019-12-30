@@ -135,4 +135,30 @@ export class ApiService{
 	GetProductsUserMatchByCategory(idUser: number, matchTxt: string, idCategory: number): Observable<any>{
 		return this._http.get(this.url + '/getProductsUserMatchByCategory/' + idUser + '/' + idCategory + '/' + matchTxt.toLowerCase());
 	}
+
+	//Devuelve el logo del sitio
+	GetNameLogo(): Observable<any>{
+		return this._http.get(this.url + '/getNameLogo');
+	}
+
+	//Inserta en la tabla del carrito, añadir nuevos productos
+	AddProductToCart(idShoppingCart: number, idProduct: number, quantity: number): Observable<any>{
+		return this._http.post(this.url + '/addProductToCart', 
+			{
+				idShoppingCart: idShoppingCart,
+				idProduct: idProduct,
+				quantity: quantity
+			}
+		);
+	}
+
+	//Verificar si esta ya el producto en el carrito
+	VerifyProductCart(idShoppingCart: number, idProduct: number): Observable<any>{
+		return this._http.get(this.url + '/VerifyProductCart/' + idShoppingCart + '/' + idProduct);
+	}
+
+	//Devuelve los productos del carrito del usuario en sesion
+	GetProductsShoppingCart(idShoppingCart: number): Observable<any>{
+		return this._http.get(this.url + '/getProductsShoppingCart/' + idShoppingCart);
+	}
 }

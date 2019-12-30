@@ -1,0 +1,95 @@
+<div class="breadcumb_area bg-img" style="background-image: url(../assets/img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Carrito de Compras</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<section class="cart_area">
+      <div class="container">
+          <div class="cart_inner">
+              <div class="table-responsive">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th scope="col">Producto</th>
+                              <th scope="col">Precio</th>
+                              <th scope="col">Cantidad</th>
+                              <th scope="col">Total</th>
+                              <th scope="col">Acción</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let product of listCart">
+                              <td>
+                                  <div class="media">
+                                      <div class="media-body">
+                                          <p>{{product.description}}</p>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>Q{{product.price}}</h5>
+                              </td>
+                              <td>
+                                  <div class="product_count">
+                                      <h5>{{product.quantity}}</h5>
+                                  </div>
+                              </td>
+                              <td>
+                                  <h5>Q{{(product.quantity * product.price)}}</h5>
+                              </td>
+                              <td align="center">
+                              	<button value="{{product.idProduct}}" #btnId (click)="DeleteProduct(btnId.value)" class="btn btn-danger"><em class="fa fa-trash"></em></button>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+
+                              </td>
+                              <td>
+
+                              </td>
+                              <td>
+                                  <h5>Total</h5>
+                              </td>
+                              <td>
+                                  <h5>Q{{total}}</h5>
+                              </td>
+                          </tr>
+                          <tr class="shipping_area">
+                              <td class="d-none d-md-block">
+
+                              </td>
+                              <td>
+
+                              </td>
+                              <td>
+                                  <h5>Shipping</h5>
+                              </td>
+                              <td>
+                                  <div class="shipping_box">
+                                      <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
+                                      <select class="shipping_select">
+                                          <option value="1">Bangladesh</option>
+                                          <option value="2">India</option>
+                                          <option value="4">Pakistan</option>
+                                      </select>
+                                      <select class="shipping_select">
+                                          <option value="1">Select a State</option>
+                                          <option value="2">Select a State</option>
+                                          <option value="4">Select a State</option>
+                                      </select>
+                                  </div>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </section>

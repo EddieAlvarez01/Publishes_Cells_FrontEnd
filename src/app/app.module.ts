@@ -13,6 +13,7 @@ import { BulkLoadComponent } from './components/bulk-load/bulk-load.component';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
 import { IndividualViewComponent } from './components/individual-view/individual-view.component';
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { IndividualViewComponent } from './components/individual-view/individual
     BulkLoadComponent,
     CatalogueComponent,
     TreeViewComponent,
-    IndividualViewComponent
+    IndividualViewComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,

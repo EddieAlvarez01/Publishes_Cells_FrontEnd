@@ -6,7 +6,9 @@ export class Product{
 		public description: string, 
 		public price: number,
 		public color: string,
-		public customer: string
+		public customer: string,
+		public stock: number,
+		public inCart: number
 	){}
 
 }

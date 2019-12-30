@@ -5,6 +5,10 @@ import { ApiService } from '../../services/api.service';
 
 import { User } from '../../../models/user';
 
+//Libreria JS
+import * as toastr from 'toastr';
+declare var $:any;
+
 @Component({
   selector: 'app-individual-view',
   templateUrl: './individual-view.component.html',
@@ -15,7 +19,9 @@ export class IndividualViewComponent implements OnInit {
 
 	public idProduct: number;
 	public user: User;
-	public product: Object;
+	public product: any;
+	public isCart: number;
+	public listStock: Array<number>;
 
   	constructor(
   		private _router: Router,
@@ -23,6 +29,8 @@ export class IndividualViewComponent implements OnInit {
   		private _apiService: ApiService
   	) {
   		this.user = JSON.parse(localStorage.getItem("user"));
+  		this.isCart = null;
+  		this.listStock = new Array();
   	}
 
   	ngOnInit() {
@@ -31,6 +39,19 @@ export class IndividualViewComponent implements OnInit {
   			this._apiService.GetProductId(this.idProduct).subscribe(
   				result => {
   					this.product = result.rows[0];
+  					if(this.user != null || this.user != undefined){
+  						this._apiService.VerifyProductCart(this.user.shoppingCart, this.idProduct).subscribe(
+  							result => {
+  								let verify = result.rows;
+  								if(verify.length > 0){
+  									this.isCart = 1;
+  								}
+  							},
+  							err => {
+  								toastr.error("Error al verificar el producto");
+  							}
+  						);
+  					}
   				},
   				err => {
   					alert("Error al cargar producto");
@@ -41,6 +62,28 @@ export class IndividualViewComponent implements OnInit {
 
   	ReditectShop(){
   		this._router.navigate(['/catalogue']);
+  	}
+
+  	AddCart(){
+  		this.listStock = [];
+  		for(let x=0; x<this.product.STOCK; x++){
+  			this.listStock.push(x+1);
+  		}
+  		$('#modalAddCart').modal();
+  	}
+
+  	ConfirmAddToCart(){
+  		let quantity = parseInt($('#slModalStock').val());
+  		this._apiService.AddProductToCart(this.user.shoppingCart, this.idProduct, quantity).subscribe(
+  			result => {
+  				this.isCart = 1;
+  				$('#modalAddCart').modal("hide");
+  				toastr.success("Agregado al carrito exitosamente");
+  			},
+  			err => {
+  				toastr.error("Error al agregar al carrito");
+  			}
+  		);
   	}
 
 }
