@@ -161,4 +161,9 @@ export class ApiService{
 	GetProductsShoppingCart(idShoppingCart: number): Observable<any>{
 		return this._http.get(this.url + '/getProductsShoppingCart/' + idShoppingCart);
 	}
+
+	//Borra un elemento del carro de compras
+	DeleteProductCart(idShoppingCart: number, idProduct: number): Observable<any>{
+		return this._http.delete(this.url + '/deleteProductCart/' + idShoppingCart + '/' + idProduct);
+	}
 }

@@ -46,4 +46,24 @@ export class ShoppingcartComponent implements OnInit {
   		);
   	}
 
+  	DeleteProduct(idProduct: number){
+  		this._apiService.DeleteProductCart(this.user.shoppingCart, idProduct).subscribe(
+  			result => {
+  				let indexDelete = 0;
+  				this.listCart.forEach((element, index) => {
+  					if(element.idProduct == idProduct){
+  						indexDelete = index;
+  						this.total -= (element.price * element.quantity);
+  						return;
+  					}
+  				});
+  				this.listCart.splice(indexDelete, 1);
+  				toastr.success("Producto eliminado exitosamente");
+  			},
+  			err => {
+  				toastr.error("Error al eliminar el prodcuto");
+  			}
+  		);
+  	}
+
 }
