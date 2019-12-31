@@ -5,7 +5,8 @@ export class Cart{
 		public description: string,
 		public price: number,
 		public quantity: number,
-		public stock: number
+		public stock: number,
+		public code: string
 	){}
 
 }

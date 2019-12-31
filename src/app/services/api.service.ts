@@ -166,4 +166,30 @@ export class ApiService{
 	DeleteProductCart(idShoppingCart: number, idProduct: number): Observable<any>{
 		return this._http.delete(this.url + '/deleteProductCart/' + idShoppingCart + '/' + idProduct);
 	}
+
+	//Genera la factura, devuelve el id de la factura, resta el monto al usuario, le suma e monto al vendedor y borra los productos del carrito
+	BuyProducts(idUser: number, nameClient: string, idShoppingCart: number, dateBill: string, total: number): Observable<any>{
+		return this._http.post(this.url + '/buyProducts', 
+			{
+				idUser: idUser,
+				nameClient: nameClient,
+				idShoppingCart: idShoppingCart,
+				dateBill: dateBill,
+				total: total
+			}
+		);
+	}
+
+	//Manda el correo de la factura
+	SendBillEmail(email: string, idUser: number, name: string, htmlPart: string, total: number): Observable<any>{
+		return this._http.post(this.url + '/sendEmailBill', 
+			{
+				email: email,
+				idUser: idUser,
+				name: name,
+				htmlPart: htmlPart,
+				total: total
+			}
+		);
+	}
 }
