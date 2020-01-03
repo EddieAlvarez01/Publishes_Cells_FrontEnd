@@ -1852,6 +1852,38 @@ img {
   height: 100%;
 }
 
+#formRating {
+  width: 250px;
+  height: 50px;
+}
+
+#formRating p {
+  text-align: center;
+}
+
+#formRating label {
+  font-size: 20px;
+  color: grey;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+#formRating label:hover,
+            label:hover ~ label {
+  color: orange;
+}
+
+#formRating input[type="radio"]:checked ~ label {
+  color: orange;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
 
 /******************************************RESPONSIVE IMAGES AND VIDEOS **************************/
 

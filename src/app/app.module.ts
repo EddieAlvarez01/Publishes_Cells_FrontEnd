@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app.routing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
 import { IndividualViewComponent } from './components/individual-view/individual-view.component';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { ProductreviewsComponent } from './components/productreviews/productreviews.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +27,15 @@ import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.co
     CatalogueComponent,
     TreeViewComponent,
     IndividualViewComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    ProductreviewsComponent
   ],
   imports: [
     BrowserModule,
     routing,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
   	appRoutingProviders

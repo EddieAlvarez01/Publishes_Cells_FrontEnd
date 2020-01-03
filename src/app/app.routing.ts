@@ -9,6 +9,7 @@ import { BulkLoadComponent } from './components/bulk-load/bulk-load.component';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { IndividualViewComponent } from './components/individual-view/individual-view.component';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { ProductreviewsComponent } from './components/productreviews/productreviews.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
 	{ path: 'catalogue', component: CatalogueComponent },
 	{ path: 'individualView/:id', component: IndividualViewComponent },
 	{ path: 'shoppingCart', component: ShoppingcartComponent },
+	{ path: 'productReviews/:id', component: ProductreviewsComponent },
 	{ path: '**', component: HomeComponent } //404
 ];
 

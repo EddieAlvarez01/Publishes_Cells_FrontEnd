@@ -192,4 +192,48 @@ export class ApiService{
 			}
 		);
 	}
+
+	//Traer la ponderacion un producto
+	GetRatingProduct(idProduct: number): Observable<any>{
+		return this._http.get(this.url + '/getRatingProduct/' + idProduct);
+	}
+
+	//Traer las dos propiedades para el detalle de ponderacion y comentarios de producto
+	GetProductRating(idProduct: number): Observable<any>{
+		return this._http.get(this.url + '/getProductForReview/' + idProduct);
+	}
+
+	//Traer los comentarios y puntuaciones de ese producto
+	GetCommentsProduct(idProduct: number): Observable<any>{
+		return this._http.get(this.url + '/GetCommentaryProduct/' + idProduct);
+	}
+
+	//Traer la puntuacion del usuario en sesion para un producto
+	GetScoreProductByUser(idProduct: number, idUser: number): Observable<any>{
+		return this._http.get(this.url + '/GetRatingByUserForProduct/' + idProduct + '/' + idUser);
+	}
+
+	//Actualiza o inserta una nueva puntuación que un usuario le da a un producto
+	UpdateScoreByUser(idProduct: number, idUser: number, quantity: number): Observable<any>{
+		return this._http.post(this.url + '/UpdateScoreByUserForProduct', 
+			{
+				idProduct: idProduct,
+				idUser: idUser,
+				quantity: quantity
+			}
+		);
+	}
+
+	//Nuevos comentarios en un producto
+	NewCommentary(creationDate: string, title: string, content: string, idUser: number, idProduct: number): Observable<any>{
+		return this._http.post(this.url + '/InsertNewCommentary', 
+			{
+				creationDate: creationDate,
+				title: title,
+				content: content,
+				idUser: idUser,
+				idProduct: idProduct
+			}
+		);
+	}
 }

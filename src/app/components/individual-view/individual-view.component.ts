@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder } from "@angular/forms";
 
 import { ApiService } from '../../services/api.service';
 
@@ -22,6 +23,7 @@ export class IndividualViewComponent implements OnInit {
 	public product: any;
 	public isCart: number;
 	public listStock: Array<number>;
+  public radioValue: string;
 
   	constructor(
   		private _router: Router,
@@ -35,7 +37,7 @@ export class IndividualViewComponent implements OnInit {
 
   	ngOnInit() {
   		this._route.params.subscribe((params: Params) => {
-  			this.idProduct = params.id;
+  			this.idProduct = parseInt(params.id);
   			this._apiService.GetProductId(this.idProduct).subscribe(
   				result => {
   					this.product = result.rows[0];
@@ -57,12 +59,29 @@ export class IndividualViewComponent implements OnInit {
   					alert("Error al cargar producto");
   				}
   			);
+        this._apiService.GetRatingProduct(this.idProduct).subscribe(
+                    result => {
+                      let rT = result.rows[0].RATING;
+                      if(rT != null){
+                        this.radioValue = Math.round(rT).toString();
+                      }else{
+                        this.radioValue = '0';
+                      }
+                    },
+                    err => {
+                      toastr.error("Error al consultar ponderación del producto");
+                    }
+        );
   		});
   	}
 
   	ReditectShop(){
   		this._router.navigate(['/catalogue']);
   	}
+
+    RedirectToReviewProduct(){
+      this._router.navigate(['/productReviews/' + this.idProduct]);
+    }
 
   	AddCart(){
   		this.listStock = [];

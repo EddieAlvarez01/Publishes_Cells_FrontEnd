@@ -23,6 +23,7 @@
     "@syncfusion/ej2-angular-navigations": "^17.4.39",
     "@syncfusion/ej2-ng-navigations": "^16.2.50",
     "bootstrap": "^4.4.1",
+    "bulma": "^0.8.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
