@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
   			result => {
   				let user: any[] = result.rows;
   				if(user.length > 0){
-            console.log(user[0]);
   					switch(user[0].STATE){
   						case 1:
   							alert("Error: Verifique su correo electronico");
@@ -52,7 +51,9 @@ export class LoginComponent implements OnInit {
   							this.user.shoppingCart = user[0].IDSHOPPINGCART;
   							switch(this.user.role){
   								case 1:
-  									
+  									localStorage.setItem("user", JSON.stringify(this.user));
+                    this.SetUserNav();
+                    this.RedirectHomeAdmin();
   								break;
   								case 2:
   								break;
@@ -91,6 +92,10 @@ export class LoginComponent implements OnInit {
 
     RedirectShop(){
       this._router.navigate(['/catalogue']);
+    }
+
+    RedirectHomeAdmin(){
+      this._router.navigate(['/configHome']);
     }
 
 }

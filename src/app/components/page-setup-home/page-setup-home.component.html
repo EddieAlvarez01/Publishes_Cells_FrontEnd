@@ -1,0 +1,62 @@
+<div class="breadcumb_area bg-img" style="background-image: url(../assets/img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Configuración de Home</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-10 col-md-offset-10" style="margin-top: 120px">
+			<div class="form-group">
+    			<label for="exampleFormControlTextarea1">Misión</label>
+   			 	<textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="mision" rows="10">{{mision}}</textarea>
+  			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-10" >
+			<div class="form-group">
+    			<label for="exampleFormControlTextarea1">Visión</label>
+   			 	<textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="vision" rows="10">{{vision}}</textarea>
+  			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-10">
+			<div class="form-group">
+    			<label for="exampleFormControlTextarea1">Sobre Mí</label>
+   			 	<textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="aboutme" rows="10">{{aboutme}}</textarea>
+  			</div>
+  			<div class="col col-xs-6 text-right">
+                <button type="button" (click)="SendInformation()" class="btn btn-sm btn-primary btn-create">Guardar Cambios</button>
+            </div>
+		</div>
+	</div>
+	<div class="row justify-content-md-center">
+		<div class="col col-lg-2" style="margin-top: 120px">
+			<div class="form-group">
+    			<label for="exampleFormControlTextarea1">Subir Video</label>
+    			<input type="file" name="exampleFormControlTextarea1" (change)="FileEventVideo($event)">
+  			</div>
+  			<div class="col col-xs-6 text-right">
+                <button type="button" (click)="SaveChanges()" class="btn btn-sm btn-primary btn-create" [disabled]="!(fileToUploadVideo.length > 0)">Guardar Cambios</button>
+            </div>
+		</div>
+	</div>
+	<div class="row justify-content-md-center">
+		<div class="col col-lg-2" style="margin-top: 120px">
+			<div class="form-group">
+    			<label for="exampleFormControlTextarea1">Subir Imagen</label>
+    			<input type="file" name="exampleFormControlTextarea1" (change)="FileEventImage($event)">
+  			</div>
+  			<div class="col col-xs-6 text-right">
+                <button type="button" (click)="SaveChanges()" class="btn btn-sm btn-primary btn-create" [disabled]="!(fileToUploadImage.length > 0)">Guardar Cambios</button>
+            </div>
+		</div>
+	</div>
+</div>

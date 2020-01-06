@@ -236,4 +236,102 @@ export class ApiService{
 			}
 		);
 	}
+
+	//Actualizar datos de la pagina home
+	UpdateDataHome(mision: string, vision: string, aboutme: string): Observable<any>{
+		return this._http.put(this.url + '/updateDataHome', 
+			{
+				mision: mision,
+				vision: vision,
+				aboutme: aboutme
+			}
+		);
+	}
+
+	//Trae la información buscada del reporte 2 del enunciado
+	GetDataReport2(year: number): Observable<any>{
+		return this._http.get(this.url + '/getHelDeskMaleAboveYear/' + year);
+	}
+
+	//Trear la información del reporte 3
+	GetDataReport3(year: number): Observable<any>{
+		return this._http.get(this.url + '/getAdminYear/' + year);
+	}
+
+	//Traer informacion del reporte 4, mas ganancias
+	GetClientsMoreProfits(): Observable<any>{
+		return this._http.get(this.url + '/getUsersHigherProfit');
+	}
+
+	//Traer la información del reporte 6, top 3 productos
+	GetTop3Productos(): Observable<any>{
+		return this._http.get(this.url + '/getTop3Products');
+	}
+
+	//Traer la informacion del reporte 7, top 3 clientes con mas productos
+	GetTop3Customers(): Observable<any>{
+		return this._http.get(this.url + '/getTop3Customers');
+	}
+
+	//Trear la informacion del reporte 9, cantidad de comentarios de productos por fecha
+	GetProductsComments(date: string): Observable<any>{
+		return this._http.get(this.url + '/getProductsComments/' + date);
+	}
+
+	//Traer la informacion del reporte 10 productos con alguna cantidad disponible
+	GetStockProduct(stock: number):Observable<any>{
+		return this._http.get(this.url + '/getProductsStock/' + stock);
+	}
+
+	//Traer la información del reporte 11, 3 productos peor calificados
+	GetTop3WorstScore(): Observable<any>{
+		return this._http.get(this.url + '/getProductsRatingTop3');
+	}
+
+	//Traer la informacion del reporte 5
+	GetProductsByAverage(stars: number): Observable<any>{
+		return this._http.get(this.url + '/getProductsByWeighing/' + stars);
+	}
+
+	GetUserForEdit(idUser: number): Observable<any>{
+		return this._http.get(this.url + '/getUserForEdit/' + idUser);
+	}
+
+	//Sube la imagen al servidor y devuelve su nombre
+	makeFileRequest(params: Array<string>, files: Array<File>, name: string){
+		return new Promise((resolve, reject) => {
+			var formData: any = new FormData();
+			var xhr = new XMLHttpRequest();
+			for(let i = 0; i < files.length; i++){
+				formData.append(name, files[i], files[i].name);
+			}
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4){
+					if(xhr.status == 200){
+						resolve(JSON.parse(xhr.response));
+					}else{
+						reject(xhr.response);
+					}
+				}
+			}
+			xhr.open('POST', this.url + '/uploadImage', true);
+			xhr.send(formData);
+		});
+	}
+
+	UpdateUserProfile(idUser: number, name: string, lastName: string, email: string, address: string, phone: string, password: string, nameImg: string): Observable<any>{
+		return this._http.put(this.url + '/updateUserProfile', 
+			{
+				idUser: idUser,
+				name: name,
+				lastName: lastName,
+				address: address,
+				phone: phone,
+				password: password,
+				nameImg: nameImg,
+				email: email
+			}
+		);
+	}
+
 }

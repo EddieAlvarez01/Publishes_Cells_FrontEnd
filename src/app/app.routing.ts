@@ -10,6 +10,18 @@ import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { IndividualViewComponent } from './components/individual-view/individual-view.component';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { ProductreviewsComponent } from './components/productreviews/productreviews.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { PageSetupHomeComponent } from './components/page-setup-home/page-setup-home.component';
+import { ReportHelpdeskAboveDateComponent } from './components/report-helpdesk-above-date/report-helpdesk-above-date.component';
+import { ReportAdminYearComponent } from './components/report-admin-year/report-admin-year.component';
+import { CustomersMoreProfitsComponent } from './components/customers-more-profits/customers-more-profits.component';
+import { ReportTop3productsComponent } from './components/report-top3products/report-top3products.component';
+import { ReportTop3CustomersComponent } from './components/report-top3-customers/report-top3-customers.component';
+import { ReportCommentsAssignedComponent } from './components/report-comments-assigned/report-comments-assigned.component';
+import { ReportProductStockComponent } from './components/report-product-stock/report-product-stock.component';
+import { ReportTop3WorstScoreComponent } from './components/report-top3-worst-score/report-top3-worst-score.component';
+import { ReportAverageScoreProductComponent } from './components/report-average-score-product/report-average-score-product.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -22,6 +34,18 @@ const appRoutes: Routes = [
 	{ path: 'individualView/:id', component: IndividualViewComponent },
 	{ path: 'shoppingCart', component: ShoppingcartComponent },
 	{ path: 'productReviews/:id', component: ProductreviewsComponent },
+	{ path: 'chatView', component: ChatComponent },
+	{ path: 'configHome', component: PageSetupHomeComponent },
+	{ path: 'reportHelpDeskAboveYear', component: ReportHelpdeskAboveDateComponent },
+	{ path: 'reportAdminYear', component: ReportAdminYearComponent },
+	{ path: 'reportCustomerMoreProfit', component: CustomersMoreProfitsComponent },
+	{ path: 'reportTop3Products', component: ReportTop3productsComponent },
+	{ path: 'reportTop3Customers', component: ReportTop3CustomersComponent },
+	{ path: 'reportCommentsAssigned', component: ReportCommentsAssignedComponent },
+	{ path: 'reportProductStock', component: ReportProductStockComponent },
+	{ path: 'reportTop3WorstScore', component: ReportTop3WorstScoreComponent },
+	{ path: 'reportAverageProduct', component: ReportAverageScoreProductComponent },
+	{ path: 'editProdile', component: EditProfileComponent },
 	{ path: '**', component: HomeComponent } //404
 ];
 
