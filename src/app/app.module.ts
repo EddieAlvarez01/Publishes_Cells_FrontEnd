@@ -27,6 +27,10 @@ import { ReportProductStockComponent } from './components/report-product-stock/r
 import { ReportTop3WorstScoreComponent } from './components/report-top3-worst-score/report-top3-worst-score.component';
 import { ReportAverageScoreProductComponent } from './components/report-average-score-product/report-average-score-product.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { UserCrudComponent } from './components/user-crud/user-crud.component';
+import { ProductCrudComponent } from './components/product-crud/product-crud.component';
+import { CategoryCrudComponent } from './components/category-crud/category-crud.component';
+import { ReportProductsCategoryComponent } from './components/report-products-category/report-products-category.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,11 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     ReportProductStockComponent,
     ReportTop3WorstScoreComponent,
     ReportAverageScoreProductComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    UserCrudComponent,
+    ProductCrudComponent,
+    CategoryCrudComponent,
+    ReportProductsCategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -334,4 +334,12 @@ export class ApiService{
 		);
 	}
 
+	GetAllProducts(): Observable<any>{
+		return this._http.get(this.url + '/getAllProducts');
+	}
+
+	GetFatherCategory(idCategory: number): Observable<any>{
+		return this._http.get(this.url + '/getFatherCategory/' + idCategory);
+	}
+
 }
