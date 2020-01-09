@@ -50,7 +50,7 @@
                            <td align="center">
                               <button *ngIf="user.STATE < 3" value="{{user.ID}}" #btnState (click)="Unsubscribe(btnState.value)" class="btn-primary">Dar de Baja</button>
                               <button *ngIf="user.STATE == 3" value="{{user.ID}}" #btnState2 (click)="ToRegister(btnState2.value)" class="btn-primary">Dar de Alta</button>
-                              <a class="btn btn-default" [routerLink]="['/updateUserCrud/' + user.ID]"><em class="fa fa-pencil"></em></a>
+                              <a class="btn btn-default" [routerLink]="['/updateUserCrud/' + user.ID]"><i class="fas fa-edit"></i></a>
                               <button value="{{user.ID}}" #btnId (click)="DeleteUser(btnId.value)" class="btn btn-danger"><em class="fa fa-trash"></em></button>
                               <!--<a class="btn btn-danger" (click)="DeleteUser(user.id)" ><em class="fa fa-trash"></em></a>-->
                             </td>
