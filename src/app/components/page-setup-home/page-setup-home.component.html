@@ -32,11 +32,19 @@
     			<label for="exampleFormControlTextarea1">Sobre Mí</label>
    			 	<textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="aboutme" rows="10">{{aboutme}}</textarea>
   			</div>
-  			<div class="col col-xs-6 text-right">
-                <button type="button" (click)="SendInformation()" class="btn btn-sm btn-primary btn-create">Guardar Cambios</button>
-            </div>
 		</div>
 	</div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-10">
+      <div class="form-group">
+          <label for="exampleFormControlTextarea2">Eslogan</label>
+          <input type="text" class="form-control" id="exampleFormControlTextarea2" [(ngModel)]="slogan" value="{{slogan}}">
+        </div>
+        <div class="col col-xs-6 text-right">
+                <button type="button" (click)="SendInformation()" class="btn btn-sm btn-primary btn-create">Guardar Cambios</button>
+            </div>
+    </div>
+  </div>
 	<div class="row justify-content-md-center">
 		<div class="col col-lg-2" style="margin-top: 120px">
 			<div class="form-group">
@@ -44,7 +52,7 @@
     			<input type="file" name="exampleFormControlTextarea1" (change)="FileEventVideo($event)">
   			</div>
   			<div class="col col-xs-6 text-right">
-                <button type="button" (click)="SaveChanges()" class="btn btn-sm btn-primary btn-create" [disabled]="!(fileToUploadVideo.length > 0)">Guardar Cambios</button>
+                <button type="button" (click)="SaveChangesVideo()" class="btn btn-sm btn-primary btn-create" [disabled]="!(fileToUploadVideo.length > 0)">Guardar Cambios</button>
             </div>
 		</div>
 	</div>

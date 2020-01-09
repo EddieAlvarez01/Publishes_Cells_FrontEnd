@@ -56,6 +56,9 @@ export class LoginComponent implements OnInit {
                     this.RedirectHomeAdmin();
   								break;
   								case 2:
+                    localStorage.setItem("user", JSON.stringify(this.user));
+                    this.SetUserNav();
+                    this.RedirectHomeHelpDesk();
   								break;
   								case 3:
   									localStorage.setItem("user", JSON.stringify(this.user));
@@ -96,6 +99,10 @@ export class LoginComponent implements OnInit {
 
     RedirectHomeAdmin(){
       this._router.navigate(['/configHome']);
+    }
+
+    RedirectHomeHelpDesk(){
+      this._router.navigate(['/selectChat']);
     }
 
 }

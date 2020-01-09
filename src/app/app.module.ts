@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -31,6 +32,13 @@ import { UserCrudComponent } from './components/user-crud/user-crud.component';
 import { ProductCrudComponent } from './components/product-crud/product-crud.component';
 import { CategoryCrudComponent } from './components/category-crud/category-crud.component';
 import { ReportProductsCategoryComponent } from './components/report-products-category/report-products-category.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { EditUserCrudComponent } from './components/edit-user-crud/edit-user-crud.component';
+import { CreateCategoryComponent } from './components/create-category/create-category.component';
+import { EditCategoryComponent } from './components/edit-category/edit-category.component';
+import { ChatUserComponent } from './components/chat-user/chat-user.component';
+import { SelectChatComponent } from './components/select-chat/select-chat.component';
+import { ReportHelpdeskAverageComponent } from './components/report-helpdesk-average/report-helpdesk-average.component';
 
 @NgModule({
   declarations: [
@@ -60,14 +68,22 @@ import { ReportProductsCategoryComponent } from './components/report-products-ca
     UserCrudComponent,
     ProductCrudComponent,
     CategoryCrudComponent,
-    ReportProductsCategoryComponent
+    ReportProductsCategoryComponent,
+    CreateUserComponent,
+    EditUserCrudComponent,
+    CreateCategoryComponent,
+    EditCategoryComponent,
+    ChatUserComponent,
+    SelectChatComponent,
+    ReportHelpdeskAverageComponent
   ],
   imports: [
     BrowserModule,
     routing,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
   	appRoutingProviders

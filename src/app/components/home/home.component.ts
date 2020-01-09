@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
 	public vision: string;
 	public aboutMe: string;
 	public video: string;
+  public slogan: string;
 
   	constructor(
   		private _apiService: ApiService
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   				this.vision = info.VISION;
   				this.aboutMe = info.ABOUTME;
   				this.video = info.VIDEO;
+          this.slogan = info.SLOGAN;
   			},
   			err => {
   				alert("Error en el servidor");

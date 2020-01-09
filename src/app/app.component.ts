@@ -15,7 +15,7 @@ import { User } from '../models/user';
 })
 export class AppComponent implements OnInit{
 
-  	title = 'PublishesCells';
+  	title;
   	public user: User;
     public logo: string;
 
@@ -35,6 +35,11 @@ export class AppComponent implements OnInit{
           this.user = result; 
         }        
       );
+      this._transferService.creteoLogo$.subscribe(
+        result => {
+          this.logo = result;
+        }
+      );
   	}
 
   	Logout(){
@@ -52,6 +57,7 @@ export class AppComponent implements OnInit{
       this._apiService.GetNameLogo().subscribe(
         result => {
           this.logo = result.rows[0].LOGO;
+          this.title = result.rows[0].NAME;
         },
         err => {
           alert("Error al cargar el logo");

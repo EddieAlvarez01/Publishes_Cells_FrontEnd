@@ -26,6 +26,13 @@ import { UserCrudComponent } from './components/user-crud/user-crud.component';
 import { ProductCrudComponent } from './components/product-crud/product-crud.component';
 import { CategoryCrudComponent } from './components/category-crud/category-crud.component';
 import { ReportProductsCategoryComponent } from './components/report-products-category/report-products-category.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { EditUserCrudComponent } from './components/edit-user-crud/edit-user-crud.component';
+import { CreateCategoryComponent } from './components/create-category/create-category.component';
+import { EditCategoryComponent } from './components/edit-category/edit-category.component';
+import { ChatUserComponent } from './components/chat-user/chat-user.component';
+import { SelectChatComponent } from './components/select-chat/select-chat.component';
+import { ReportHelpdeskAverageComponent } from './components/report-helpdesk-average/report-helpdesk-average.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -38,7 +45,7 @@ const appRoutes: Routes = [
 	{ path: 'individualView/:id', component: IndividualViewComponent },
 	{ path: 'shoppingCart', component: ShoppingcartComponent },
 	{ path: 'productReviews/:id', component: ProductreviewsComponent },
-	{ path: 'chatView', component: ChatComponent },
+	{ path: 'chatView/:id', component: ChatComponent },
 	{ path: 'configHome', component: PageSetupHomeComponent },
 	{ path: 'reportHelpDeskAboveYear', component: ReportHelpdeskAboveDateComponent },
 	{ path: 'reportAdminYear', component: ReportAdminYearComponent },
@@ -54,6 +61,13 @@ const appRoutes: Routes = [
 	{ path: 'productCrud', component: ProductCrudComponent },
 	{ path: 'categoryCrud', component: CategoryCrudComponent },
 	{ path: 'reportProductsCategory', component: ReportProductsCategoryComponent },
+	{ path: 'createUser', component: CreateUserComponent },
+	{ path: 'updateUserCrud/:id', component: EditUserCrudComponent },
+	{ path: 'createCategory', component: CreateCategoryComponent },
+	{ path: 'editCategory/:id', component: EditCategoryComponent },
+	{ path: 'chatUser', component: ChatUserComponent },
+	{ path: 'selectChat', component: SelectChatComponent },
+	{ path: 'reportHelpDeskAverage', component: ReportHelpdeskAverageComponent },
 	{ path: '**', component: HomeComponent } //404
 ];
 

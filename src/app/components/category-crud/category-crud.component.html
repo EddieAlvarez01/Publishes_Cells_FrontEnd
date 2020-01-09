@@ -1,1 +1,62 @@
-<p>category-crud works!</p>
+<div class="breadcumb_area bg-img" style="background-image: url(../assets/img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Listado de Categorías</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+    
+        <div class="col-md-11 col-md-offset-" style="margin-top: 120px">
+
+            <div class="panel panel-default panel-table">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <h3 class="panel-title">Listado de Categorías</h3>
+                  </div>
+                  <div class="col col-xs-6 text-right">
+                   <button type="button" (click)="RedirectCreateCategory()" class="btn btn-sm btn-primary btn-create">Crear Categoría</button>
+                		<!--<div class="input-group">
+                   	 		<input class="form-control" style="width: 10%" id="system-search" name="q" type="number" placeholder="Año de nacimiento" [(ngModel)]="year" required>
+                   	 		<div class="input-group-append">
+    							<button class="btn btn-outline-secondary" (click)="" type="button"><i class="fa fa-search"></i></button>
+  							</div>
+                		</div>-->
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped table-bordered table-list" id="userTb">
+                  <thead>
+                    <tr>
+                        <th>Acción</th>
+                        <th class="hidden-xs">ID</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                          <tr *ngFor="let category of categoryList">
+                           <td align="center">
+                              <a class="btn btn-default" [routerLink]="['/editCategory/' + category.ID]"><em class="fa fa-pencil"></em></a>
+                              <button value="{{category.ID}}" #btnId (click)="DeleCategory(btnId.value)" class="btn btn-danger"><em class="fa fa-trash"></em></button>
+                              <!--<a class="btn btn-danger" (click)="DeleteUser(user.id)" ><em class="fa fa-trash"></em></a>-->
+                            </td>
+                            <td class="hidden-xs">{{category.ID}}</td>
+                            <td>{{category.NAME}}</td>
+                            <td *ngIf="category.DESCRIPTION != null">{{category.DESCRIPTION}}</td>
+                            <td *ngIf="category.DESCRIPTION == null">(Sin descripción)</td>
+                          </tr>
+                        </tbody>
+                </table>
+            
+              </div>
+            </div>
+
+</div></div></div>

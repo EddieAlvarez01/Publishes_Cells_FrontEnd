@@ -19,7 +19,7 @@
 						<div><h6>{{productDetail.DESCRIPTION}}</h6></div>
 						<div class="blog_images">
 							<div class="row">
-								<div class="col-lg-6 blog_images_col"><div class="blog_image_small"><img src="{{'http://localhost:3700/api/get-image/' + productDetail.IMAGE}}" alt=""></div></div>
+								<div class="col-lg-6 blog_images_col"><div class="blog_image_small"><img src="{{'http://192.168.43.109:3700/api/get-image/' + productDetail.IMAGE}}" height="50px" alt=""></div></div>
 								<div class="col-lg-6 blog_images_col">
 									<form id="formRating">
 				                      <p class="clasificacion">
@@ -42,39 +42,6 @@
 					<hr>
 					<!-- Comments -->
 					<div class="comments-area">
-											<div class="comment-list">
-													<div class="single-comment justify-content-between d-flex">
-															<div class="user justify-content-between d-flex">
-																	<div class="desc">
-																			<h5>
-																				Emilly Blunt
-																			</h5>
-																			<p class="date">December 4, 2017 at 3:12 pm </p>
-																			<p style="font: bold 90% monospace;
-																			font-size: x-large;">Title</p>
-																			<p class="comment">
-																					Never say goodbye till the end comes!
-																			</p>
-																	</div>
-															</div>
-															<div class="reply-btn">
-																	<form id="formRating">
-												                      <p class="clasificacion">
-												                        <input id="radio11" type="radio" name="estrellas3" value="5"><!--
-												                        --><label for="radio11">★</label><!--
-												                        --><input id="radio12"  type="radio" name="estrellas3" value="4"><!--
-												                        --><label for="radio12">★</label><!--
-												                        --><input id="radio13" type="radio" name="estrellas3" value="3"><!--
-												                        --><label for="radio13">★</label><!--
-												                        --><input id="radio14" type="radio" name="estrellas3" value="2"><!--
-												                        --><label for="radio14">★</label><!--
-												                        --><input id="radio15" type="radio" name="estrellas3" value="1"><!--
-												                        --><label for="radio15">★</label>
-												                      </p>
-												                    </form>	
-															</div>
-													</div>
-											</div>
 											<div *ngFor="let item of commentList" class="comment-list">
 													<div class="single-comment justify-content-between d-flex">
 															<div class="user justify-content-between d-flex">
@@ -137,9 +104,9 @@
 													</div>
 													<label for="message">Comentario</label>
 													<div class="form-group">
-															<textarea class="form-control mb-10" rows="5" name="message" placeholder="Comentario" #contentComment="ngModel" [(ngModel)]="contentC" required></textarea>
+															<textarea class="form-control mb-10" rows="5" name="message" placeholder="Comentario" #contentComment="ngModel" [(ngModel)]="contentC" required style="max-width: 480px"></textarea>
+															<input type="submit" name="" value="Postear Comentario" [disabled]="!formCommentary.form.valid || !(radioValueForUser != '0')"(click)="NewCommentary()">
 													</div>
-													<input type="submit" name="" value="Postear Comentario" [disabled]="!formCommentary.form.valid || !(radioValueForUser != '0')"(click)="NewCommentary()">
 											</form>
 									</div>
 				</div>

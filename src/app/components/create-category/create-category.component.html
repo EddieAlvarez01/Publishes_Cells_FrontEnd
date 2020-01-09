@@ -1,0 +1,47 @@
+<div class="breadcumb_area bg-img" style="background-image: url(../assets/img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Crear Categoría</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div class="checkout_area section-padding-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 offset-sm-3">
+                    <div class="checkout_details_area mt-50 clearfix">
+                        <form #formCreate="ngForm" (ngSubmit)="onSubmitForm()">
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg-6 col-md-offset-2">
+                                    <label for="first_name">Nombre <span>*</span></label>
+                                    <input type="text" name="first_name" class="form-control" #nombre="ngModel" [(ngModel)]="name" required>
+                                    <span *ngIf="nombre.touched && !nombre.valid" style="color: red">
+                                        El nombre es obligatorio
+                                    </span>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="telefono">Descripción</label>
+                                    <textarea class="form-control" name="telefono" id="exampleFormControlTextarea1" [(ngModel)]="description" rows="10">{{description}}</textarea>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="genero">Categoría Padre</label>
+                                    <select class="w-100" name="genero" #genero="ngModel" [(ngModel)]="slcFather">
+                                        <option value="0">Ninguno</option>
+                                        <option *ngFor="let item of categoriesList" value="item.ID">{{item.NAME}}</option>
+                                    </select>
+                                </div>
+                                <div class="col col-lg-6">
+                                    <input type="submit" class="btn essence-btn" value="Crear categoría" [disabled]="!formCreate.form.valid">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+

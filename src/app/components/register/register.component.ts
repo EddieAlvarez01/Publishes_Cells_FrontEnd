@@ -45,7 +45,6 @@ export class RegisterComponent implements OnInit {
       this.state = 1;
       this.role = 3;
       this.idMemberClass = Math.floor(Math.random() * 5);
-      console.log(this.idMemberClass);
       if(this.idMemberClass == 0) this.idMemberClass = 1;
       switch(this.idMemberClass){
         case 1:

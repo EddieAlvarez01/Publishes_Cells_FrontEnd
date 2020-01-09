@@ -10,7 +10,7 @@ export class ApiService{
 	constructor(
 		public _http: HttpClient 
 	){
-		this.url = 'http://localhost:3700/api'
+		this.url = 'http://192.168.43.109:3700/api'
 	}
 
 	//Consume la api de un metodo get, que devuelve la info de la pagina
@@ -238,12 +238,13 @@ export class ApiService{
 	}
 
 	//Actualizar datos de la pagina home
-	UpdateDataHome(mision: string, vision: string, aboutme: string): Observable<any>{
+	UpdateDataHome(mision: string, vision: string, aboutme: string, slogan: string): Observable<any>{
 		return this._http.put(this.url + '/updateDataHome', 
 			{
 				mision: mision,
 				vision: vision,
-				aboutme: aboutme
+				aboutme: aboutme,
+				slogan: slogan
 			}
 		);
 	}
@@ -319,6 +320,28 @@ export class ApiService{
 		});
 	}
 
+	//Sube el video al servidor y devuelve el nombre
+	makeFileRequestVideo(params: Array<string>, files: Array<File>, name: string){
+		return new Promise((resolve, reject) => {
+			var formData: any = new FormData();
+			var xhr = new XMLHttpRequest();
+			for(let i = 0; i < files.length; i++){
+				formData.append(name, files[i], files[i].name);
+			}
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4){
+					if(xhr.status == 200){
+						resolve(JSON.parse(xhr.response));
+					}else{
+						reject(xhr.response);
+					}
+				}
+			}
+			xhr.open('POST', this.url + '/uploadVideo', true);
+			xhr.send(formData);
+		});
+	}
+
 	UpdateUserProfile(idUser: number, name: string, lastName: string, email: string, address: string, phone: string, password: string, nameImg: string): Observable<any>{
 		return this._http.put(this.url + '/updateUserProfile', 
 			{
@@ -340,6 +363,150 @@ export class ApiService{
 
 	GetFatherCategory(idCategory: number): Observable<any>{
 		return this._http.get(this.url + '/getFatherCategory/' + idCategory);
+	}
+
+	//Trae los usuarios para listar en el crud de usuarios del administrador
+	GetUserCrud(): Observable<any>{
+		return this._http.get(this.url + '/getUserCrud');
+	}
+
+	//Actualiza un usuario seleccionado en el crud
+	UpdateUserCrud(idUser: number, name: string, lastName: string, password: string, email: string, phone: string, address: string): Observable<any>{
+		return this._http.put(this.url + '/updateUserCrud', 
+			{
+				idUser: idUser,
+				name: name,
+				lastName: lastName,
+				password: password,
+				email: email,
+				phone: phone,
+				address: address
+			}
+		);
+	}
+
+	//ELiminar un usuario desde el crud(Si da error es porque tiene amarrado cosas[foraneas])
+	DeleteUserCrud(idUser: number): Observable<any>{
+		return this._http.delete(this.url + '/deleteUser/' + idUser);
+	}
+
+	//Trae un usuario en base al id, solo con los datos para editar en el crud
+	GetUserForEditCrud(idUser: number): Observable<any>{
+		return this._http.get(this.url + '/getUserForCrud/' + idUser);
+	}
+
+	//Trae la categoria para listar en el crud
+	GetAllCategoriesForCrud(): Observable<any>{
+		return this._http.get(this.url + '/getAllCategoriesForCrud');
+	}
+
+	//Crear una nueva categoria, si el nombre esta repetido no se creará
+	CreateCategory(name: string, description: string, idFather: number): Observable<any>{
+		return this._http.post(this.url + '/createCategory', 
+			{
+				name: name,
+				description: description,
+				idFather: idFather
+			}
+		);
+	}
+
+	//Actualizar informacion por medio del crud de una categoria
+	UpdateCategory(id: number, name: string, description: string): Observable<any>{
+		return this._http.put(this.url + '/updateCategory', 
+			{
+				idCategory: id,
+				name: name,
+				description: description
+			}
+		);
+	}
+
+	/*ELiminar una categoria, si es padre y posee hijas dara error, puesto que una padre eliminaria todas las hijas y si estas estan anidadas a un producto
+	tendrian que eliminar esos productos o quedarse sin clasificar, es un error, igual si estan refrencias a un proucto dara error la eliminación*/
+	DeleteCategory(idCategory: number): Observable<any>{
+		return this._http.delete(this.url + '/deleteCategory/' + idCategory);
+	}
+
+	//Traer por un id, la categoria para su edición
+	GetCategoryId(idCategory: number): Observable<any>{
+		return this._http.get(this.url + '/getCategoryByid/' + idCategory);
+	}
+
+	//Traer el room del chat del usuario
+	GetRoomUser(idUser: number): Observable<any>{
+		return this._http.get(this.url + '/getRoomUser/' + idUser);
+	}
+
+	//Crear el room de chat para un usuario
+	CreateRoomUser(idHelpDesk: number, idUser: number): Observable<any>{
+		return this._http.post(this.url + '/createRoomUser', 
+			{
+				idHelpDesk: idHelpDesk,
+				idUser: idUser
+			}
+		);
+	}
+
+	//Trae la lista de todos los help desk
+	GetAllHelpDesk(): Observable<any>{
+		return this._http.get(this.url + '/getAllHelpDesk');
+	}
+
+	//Traer todos los mensajes de un room
+	GetAllMessagesRoom(idRoom: number): Observable<any>{
+		return this._http.get(this.url + '/getAllMessagesRoom/' + idRoom);
+	}
+
+	//Inserta un nuevo mensaje en la bd
+	CreateNewMessage(idUser: number, idRoom: number, content: string): Observable<any>{
+		return this._http.post(this.url + '/createNewMessage', 
+			{
+				idUser: idUser,
+				idRoom: idRoom,
+				content: content
+			}
+		);
+	}
+
+	//TRae al help desk para ser calificado
+	GetHelpDeskRoom(idRoom: number): Observable<any>{
+		return this._http.get(this.url + '/getHelpDeskRoom/' + idRoom);
+	}
+
+	//Inserta en la tabal de calificacion a un help desk y borra el room del chat
+	CreateNewRating(idRoom: number, idHelpDesk: number, idUser: number, quantity: number): Observable<any>{
+		return this._http.post(this.url + '/newRatingUser', 
+			{
+				idHelpDesk: idHelpDesk,
+				idUser: idUser,
+				quantity: quantity,
+				idRoom: idRoom
+			}
+		);
+	}
+
+	//Devuelve todos los help desk con su promedio de puntuación
+	GetHelpDeskAverage(): Observable<any>{
+		return this._http.get(this.url + '/getHelpDeskAverage');
+	}
+
+	//Actualiza el video de home
+	UpdateVideoHome(video: string): Observable<any>{
+		return this._http.put(this.url + '/updateVideo',
+			{
+				video: video
+			}
+		);
+	}
+
+	//Actualiza el logo de la pagina
+	UpdateLogo(image: string): Observable<any>{
+		return this._http.put(this.url + '/updateLogo',
+			{
+				image: image
+			}
+		);
 	}
 
 }
