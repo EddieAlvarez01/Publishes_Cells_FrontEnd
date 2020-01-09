@@ -509,4 +509,15 @@ export class ApiService{
 		);
 	}
 
+	//Actualiza el estado para dar de baja o alta y registra en la bitacora
+	UpdateState(idUser: number, idAdmin: number, idAction: number){
+		return this._http.put(this.url + '/updateStatus', 
+			{
+				idUser: idUser,
+				idAdmin: idAdmin,
+				idAction: idAction
+			}
+		);
+	}
+
 }

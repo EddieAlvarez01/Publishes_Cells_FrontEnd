@@ -7,7 +7,7 @@
                         <!-- ##### Single Widget ##### -->
                         <div class="widget catagory mb-50">
                             <!-- Widget Title -->
-                            <h6 class="widget-title mb-30">Catagories</h6>
+                            <h6 class="widget-title mb-30">Catagorías</h6>
 
                             <!--  Catagories  -->
                             <div class="catagories-menu">
@@ -74,7 +74,7 @@
                                             <div class="add-to-cart-btn" *ngIf="product.stock > 0; then btnCart else btnExhausted"></div>
                                             <ng-template #btnCart>
                                                 <button *ngIf="!product.inCart" value="{{product.id}}" #btnAddCart (click)="AddCart(btnAddCart.value)" class="btn essence-btn">Add to Cart</button>
-                                                <button *ngIf="product.inCart" class="btn essence-btn" disabled>Añadido al carro</button>
+                                                <button *ngIf="product.inCart" class="btn essence-btn" disabled>Añadido</button>
                                             </ng-template>
                                             <ng-template #btnExhausted>
                                                 <button class="btn essence-btn" disabled>Agotado</button>

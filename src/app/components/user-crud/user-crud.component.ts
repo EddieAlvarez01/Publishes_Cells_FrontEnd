@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from '../../services/api.service';
+import { User } from '../../../models/user';
 
 //Libreria JS
 import * as toastr from 'toastr';
@@ -17,11 +18,14 @@ declare var $:any;
 export class UserCrudComponent implements OnInit {
 
 	 public userList: any[];
+   public user: User;
 
   	constructor(
   		private _apiService: ApiService,
   		private _router: Router
-  	) { }
+  	) {
+      this.user = JSON.parse(localStorage.getItem("user"));
+    }
 
   	ngOnInit() {
   		this._apiService.GetUserCrud().subscribe(
@@ -58,6 +62,42 @@ export class UserCrudComponent implements OnInit {
         },
         err => {
           toastr.error("Error al eliminar el usuario");
+        }
+      );
+    }
+
+    Unsubscribe(id: number){
+      this._apiService.UpdateState(id, this.user.id, 2).subscribe(
+        result => {
+          var idErase;
+          this.userList.forEach((element, index) => {
+            if(element.ID == id){
+              idErase = index;
+              return;
+            }
+          });
+          this.userList[idErase].STATE = 3;
+        },
+        err => {
+          toastr.error("Error al dar de baja usuario");
+        }
+      );
+    }
+
+    ToRegister(id: number){
+      this._apiService.UpdateState(id, this.user.id, 1).subscribe(
+        result => {
+          var idErase;
+          this.userList.forEach((element, index) => {
+            if(element.ID == id){
+              idErase = index;
+              return;
+            }
+          });
+          this.userList[idErase].STATE = 2;
+        },
+        err => {
+          toastr.error("Error al dar de alta el usuario");
         }
       );
     }

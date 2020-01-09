@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
   									alert("Error no existe el rol");
   							}
   						break;
-  						case 0:
+  						case 3:
   							alert("Error: Su cuenta ha sido dada de baja");
   						break;
   						default:
