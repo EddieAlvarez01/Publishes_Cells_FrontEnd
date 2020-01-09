@@ -520,4 +520,15 @@ export class ApiService{
 		);
 	}
 
+	//Envia el correo con la contraseña para administradores y help desk
+	SendEmailPassword(email: string, name: string, password: string): Observable<any>{
+		return this._http.post(this.url + '/senEmailRoleAdmin', 
+			{
+				email: email,
+				name: name,
+				password: password
+			}
+		);
+	}
+
 }

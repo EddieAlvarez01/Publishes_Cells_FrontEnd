@@ -48,7 +48,14 @@ export class CreateUserComponent implements OnInit {
   			this._apiService.RegisterUser(this.name, this.lastName, this.password, this.email, this.phone, null, this.gender, birthDay, this.registrationDate, this.address,
   											0, 0, this.state, roleInt, 1).subscribe(
   												result => {
-  													toastr.success("Usuario creado exitosamente");
+                            this._apiService.SendEmailPassword(this.email, this.name + ' ' + this.lastName, this.password).subscribe(
+                              result => {
+                                toastr.success("Usuario creado exitosamente");
+                              },
+                              err => {
+                                toastr.error("Error al mandar correo");
+                              }
+                            );
   												},
   												err => {
   													toastr.error("Error al crear usuario");
